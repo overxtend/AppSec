@@ -66,6 +66,34 @@ This breaks out of the HTML safely and injects an `<img>` with an `onerror` Java
 
 ## 🔒 High Security – Whitelist Bypass
 
+📌 Overview
+In the High Security level, DVWA attempts to mitigate DOM-based XSS attacks by using a strict server-side whitelist in PHP. Only specific values for the default parameter (English, French, German, Spanish) are allowed. All other values trigger a redirect to the default page.
+
+However, the actual vulnerability lies entirely on the client side, inside the <script> block within the HTML page. The JavaScript code reads the default parameter from the URL and injects it into the DOM using document.write() without sanitization. This logic is flawed and leads to DOM-based XSS — even though the server doesn’t reflect or store the malicious payload.
+
+🔍 Vulnerability Breakdown
+
+```if (document.location.href.indexOf("default=") >= 0) {
+    var lang = document.location.href.substring(document.location.href.indexOf("default=")+8);
+    document.write("<option value='" + lang + "'>" + decodeURI(lang) + "</option>");
+    document.write("<option value='' disabled='disabled'>----</option>");
+}
+
+```
+❌ Problem Description
+```🔒 Vulnerability	❌ Problem Description
+DOM-Based XSS	User-controlled input (default) is inserted directly into the DOM via document.write() without escaping or sanitization
+Bypass of Server Checks	Since the XSS executes purely in the client (browser), the server-side whitelist check has no effect
+URL Fragment Injection	Payloads in the URL fragment (#) are not sent to the server — only seen by the browser
+```
+
+🔁 How It Works:
+
+The PHP server only sees ?default=English, which passes the whitelist.
+The browser also sees the fragment #<script>...</script> — which is ignored by the server.
+The DOM-based script extracts default=English#<script>... from document.location.href.
+document.write() injects the payload into the page directly — leading to XSS.
+
 PHP restricts input to one of:
 - English
 - French
