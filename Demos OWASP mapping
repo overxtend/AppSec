@@ -1,0 +1,27 @@
+| 🧪 Topic                            | ⏱️ Time | 🔐 OWASP Category (2021)                                   |
+| ----------------------------------- | ------- | ---------------------------------------------------------- |
+| Broken Access Control               | 4 min   | **A01: Broken Access Control**                             |
+| Clickjacking                        | 8 min   | **A05: Security Misconfiguration** (UI Redressing)         |
+| Command Injection                   | 5 min   | **A03: Injection**                                         |
+| Components w/ Known Vulnerabilities | 12 min  | **A06: Vulnerable & Outdated Components**                  |
+| Credentials in URL                  | 2 min   | **A07: Identification & Authentication Failures**          |
+| CSRF - GET                          | 6 min   | **A01: Broken Access Control** / A05                       |
+| CSRF - POST                         | 8 min   | **A01: Broken Access Control** / A05                       |
+| Directory Traversal                 | 4 min   | **A05: Security Misconfiguration**                         |
+| DOM XSS                             | 10 min  | **A03: Injection** (Client-side)                           |
+| Horizontal Privilege Escalation     | 6 min   | **A01: Broken Access Control**                             |
+| HSTS                                | 6 min   | **A08: Software and Data Integrity Failures**              |
+| Insecure Deserialization            | 8 min   | **A08: Software and Data Integrity Failures**              |
+| Insecure TLS Validation             | 4 min   | **A02: Cryptographic Failures**                            |
+| Insecure URL Redirect               | 6 min   | **A01: Broken Access Control** / A10                       |
+| XSS - Persistent                    | 6 min   | **A03: Injection**                                         |
+| XSS - Reflected                     | 6 min   | **A03: Injection**                                         |
+| Session Fixation                    | 7 min   | **A07: Identification & Authentication Failures**          |
+| Session Exposure                    | 2 min   | **A07: Identification & Authentication Failures**          |
+| SQL Injection                       | 10 min  | **A03: Injection**                                         |
+| User Enumeration                    | 3 min   | **A07: Identification & Authentication Failures**          |
+| Vertical Privilege Escalation       | 6 min   | **A01: Broken Access Control**                             |
+| XXE                                 | 4 min   | **A05: Security Misconfiguration** / Legacy A04            |
+| Cookie – HttpOnly                   | 6 min   | **A07: Identification & Authentication Failures**          |
+| Cookie – Secure Flag                | 6 min   | **A07: Identification & Authentication Failures**          |
+| HTML – Open Redirect                | 5 min   | **A10: Server-Side Request Forgery (or Redirection Risk)** |
