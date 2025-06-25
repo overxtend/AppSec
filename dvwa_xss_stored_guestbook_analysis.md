@@ -85,7 +85,8 @@ $name = preg_replace( '/<(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/i', '', $name );
 
 If the HTML rendering is weak or double encoded elsewhere, payloads using:
 ```html
-<svg onload=alert(1)>
+On title: <img src='x' onerror='alert(1)'>
+!! encode the payload before you send it with burp
 ```
 might still slip through, depending on output context.
 
