@@ -27,10 +27,12 @@ https://github.com/OWASP/crAPI
 
 # Launch the application
 cd crAPI
-docker-compose up -d
+docker compose pull 
+docker compose -f docker-compose.yaml up -d
+docker ps
 ```
 
-Visit: [`http://127.0.0.1:8888`](http://127.0.0.1:8888)\
+Visit: [`http://127.0.0.1:8888`](http://crapi.local:8888)\
 Ensure Docker & Docker Compose ≥ **v1.27.0** are installed.
 
 ---
