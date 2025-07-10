@@ -28,7 +28,7 @@ https://github.com/OWASP/crAPI
 # Launch the application
 cd crAPI
 docker compose pull 
-docker compose -f docker-compose.yaml up -d
+docker compose -f docker-compose.yml up -d
 docker ps
 ```
 
